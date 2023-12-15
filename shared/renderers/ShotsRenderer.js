@@ -16,12 +16,14 @@ export class ShotsRenderer {
     this.ctx.fillRect(x, y, 10, SCALE_COEF);
   };
 
-  moveShots = () => {
+  moveShots = (onMoveShots) => {
     this.shots.forEach((shot) => {
       if (shot.x < this.sceneWidth) {
         shot.x += 10;
         this.renderShot(shot.x, shot.y);
       }
     });
+
+    onMoveShots();
   };
 }

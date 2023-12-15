@@ -136,7 +136,32 @@ export function initGame() {
         SCALE_COEF
       ),
     asteroidsRenderer.moveAsteroids,
-    shotsRenderer.moveShots,
+    () => {
+      shotsRenderer.moveShots(() => {
+        shotsRenderer.shots.forEach((shot) => {
+          const foundAsteroidIndex = asteroidsRenderer.asteroids.findIndex(
+            (asteroid) => {
+              return (
+                shot.x >= asteroid.x &&
+                shot.x <= asteroid.x + 10 &&
+                shot.y >= asteroid.y &&
+                shot.y <= asteroid.y + 80 // ????????  (STARSHIP_TEMPLATE_DEFAULT.length - 1) * SCALE_COEF
+              );
+            }
+          );
+
+          if (foundAsteroidIndex > -1) {
+            const asteroid = asteroidsRenderer.asteroids[foundAsteroidIndex];
+            asteroid.x = asteroid.initX;
+            shot.y = SCENE_HIGHT + 20;
+          }
+
+          if (shot.x > SCENE_WIDTH) {
+            shot.y = SCENE_HIGHT + 20;
+          }
+        });
+      });
+    },
   ];
 
   const sceneTimer = getSceneTimer(renderFns, sceneCtx, getState, tick);
