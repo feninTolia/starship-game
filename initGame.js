@@ -2,6 +2,10 @@ import {
   SCALE_COEF,
   SCENE_HIGHT,
   SCENE_WIDTH,
+  STARSHIP_HEIGHT,
+  STARSHIP_SHOT_HEIGHT,
+  STARSHIP_SHOT_WIDTH,
+  STARSHIP_WIDTH,
 } from './shared/constants/constants';
 import { getSceneTimer } from './sceneTimer';
 import { StarsRenderer } from './shared/renderers/StarsRenderer';
@@ -36,18 +40,34 @@ const tick = 10;
 function getState() {
   switch (controllerState.pressedHorizontalKey) {
     case 'ArrowRight':
-      state.posX += 2;
+      if (state.posX >= SCENE_WIDTH - STARSHIP_WIDTH) {
+        state.posX += 0;
+      } else {
+        state.posX += 2;
+      }
       break;
     case 'ArrowLeft':
-      state.posX -= 2;
+      if (state.posX <= 0) {
+        state.posX = 0;
+      } else {
+        state.posX -= 2;
+      }
       break;
   }
   switch (controllerState.pressedVerticalKey) {
     case 'ArrowUp':
-      state.posY -= 4;
+      if (state.posY <= 0) {
+        state.posY -= 0;
+      } else {
+        state.posY -= 4;
+      }
       break;
     case 'ArrowDown':
-      state.posY += 4;
+      if (state.posY >= SCENE_HIGHT - STARSHIP_HEIGHT) {
+        state.posY += 0;
+      } else {
+        state.posY += 4;
+      }
       break;
   }
 
@@ -91,12 +111,12 @@ export function initGame() {
     },
     Space: () => {
       shotsRenderer.addShot(
-        state.posX + (STARSHIP_TEMPLATE_DEFAULT[0].length * SCALE_COEF) / 3,
+        state.posX + STARSHIP_WIDTH - STARSHIP_SHOT_WIDTH * 2,
         state.posY
       );
       shotsRenderer.addShot(
-        state.posX + (STARSHIP_TEMPLATE_DEFAULT[0].length * SCALE_COEF) / 3,
-        state.posY + (STARSHIP_TEMPLATE_DEFAULT.length - 1) * SCALE_COEF
+        state.posX + STARSHIP_WIDTH - STARSHIP_SHOT_WIDTH * 2,
+        state.posY + STARSHIP_HEIGHT - STARSHIP_SHOT_HEIGHT
       );
     },
   };
@@ -145,7 +165,7 @@ export function initGame() {
                 shot.x >= asteroid.x &&
                 shot.x <= asteroid.x + 10 &&
                 shot.y >= asteroid.y &&
-                shot.y <= asteroid.y + 80 // ????????  (STARSHIP_TEMPLATE_DEFAULT.length - 1) * SCALE_COEF
+                shot.y <= asteroid.y + STARSHIP_HEIGHT
               );
             }
           );
@@ -153,10 +173,6 @@ export function initGame() {
           if (foundAsteroidIndex > -1) {
             const asteroid = asteroidsRenderer.asteroids[foundAsteroidIndex];
             asteroid.x = asteroid.initX;
-            shot.y = SCENE_HIGHT + 20;
-          }
-
-          if (shot.x > SCENE_WIDTH) {
             shot.y = SCENE_HIGHT + 20;
           }
         });

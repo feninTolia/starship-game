@@ -1,4 +1,4 @@
-import { SCALE_COEF } from '../constants/constants';
+import { SCALE_COEF, STARSHIP_SHOT_WIDTH } from '../constants/constants';
 
 export class ShotsRenderer {
   shots = []; //{x: number, y: number}
@@ -13,14 +13,16 @@ export class ShotsRenderer {
 
   renderShot = (x, y) => {
     this.ctx.fillStyle = 'yellow';
-    this.ctx.fillRect(x, y, 10, SCALE_COEF);
+    this.ctx.fillRect(x, y, STARSHIP_SHOT_WIDTH, SCALE_COEF);
   };
 
   moveShots = (onMoveShots) => {
-    this.shots.forEach((shot) => {
+    this.shots.forEach((shot, idx) => {
       if (shot.x < this.sceneWidth) {
         shot.x += 10;
         this.renderShot(shot.x, shot.y);
+      } else if (shot.x > this.sceneWidth) {
+        this.shots.splice(idx, 1);
       }
     });
 
