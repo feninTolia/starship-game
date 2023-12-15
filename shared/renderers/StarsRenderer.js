@@ -1,4 +1,4 @@
-import { getRandomInt } from './utils';
+import { getRandomInt } from '../utils/utils';
 
 export class StarsRenderer {
   stars = []; //{x:number, y:number}
@@ -8,11 +8,9 @@ export class StarsRenderer {
     this.sceneHight = sceneHight;
 
     this.generateStars();
-    this.renderStars();
   }
 
   generateStars = () => {
-    console.log('in generate stars');
     for (let y = 0; y < this.sceneHight; y++) {
       for (let x = 0; x < this.sceneWidth; x++) {
         const random = getRandomInt(1000);
