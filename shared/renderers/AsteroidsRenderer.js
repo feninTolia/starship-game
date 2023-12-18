@@ -45,7 +45,7 @@ export class AsteroidsRenderer {
         asteroid.x -= IS_CHROME ? 4 : 2;
       }
 
-      this.renderAsteroids(asteroid.x, asteroid.y, 4);
+      this.renderAsteroids(asteroid.x, asteroid.y);
     });
   };
 }

@@ -9,7 +9,6 @@ export class StarsRenderer {
     this.sceneHight = sceneHight;
 
     this.generateStars();
-    console.log(IS_CHROME);
   }
 
   generateStars = () => {
