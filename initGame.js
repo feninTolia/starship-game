@@ -1,5 +1,4 @@
 import {
-  IS_CHROME,
   SCALE_COEF,
   SCENE_HIGHT,
   SCENE_WIDTH,
@@ -44,14 +43,14 @@ function getState() {
       if (state.posX >= SCENE_WIDTH - STARSHIP_WIDTH) {
         state.posX += 0;
       } else {
-        state.posX += IS_CHROME ? 6 : 3;
+        state.posX += 3;
       }
       break;
     case 'ArrowLeft':
       if (state.posX <= 0) {
         state.posX = 0;
       } else {
-        state.posX -= IS_CHROME ? 6 : 3;
+        state.posX -= 3;
       }
       break;
   }
@@ -60,14 +59,14 @@ function getState() {
       if (state.posY <= 0) {
         state.posY -= 0;
       } else {
-        state.posY -= IS_CHROME ? 8 : 4;
+        state.posY -= 4;
       }
       break;
     case 'ArrowDown':
       if (state.posY >= SCENE_HIGHT - STARSHIP_HEIGHT) {
         state.posY += 0;
       } else {
-        state.posY += IS_CHROME ? 8 : 4;
+        state.posY += 4;
       }
       break;
   }

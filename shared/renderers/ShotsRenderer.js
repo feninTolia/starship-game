@@ -1,8 +1,4 @@
-import {
-  IS_CHROME,
-  SCALE_COEF,
-  STARSHIP_SHOT_WIDTH,
-} from '../constants/constants';
+import { SCALE_COEF, STARSHIP_SHOT_WIDTH } from '../constants/constants';
 
 export class ShotsRenderer {
   shots = []; //{x: number, y: number}
@@ -23,7 +19,7 @@ export class ShotsRenderer {
   moveShots = (onMoveShots) => {
     this.shots.forEach((shot, idx) => {
       if (shot.x < this.sceneWidth) {
-        shot.x += IS_CHROME ? 17 : 10;
+        shot.x += 10;
         this.renderShot(shot.x, shot.y);
       } else if (shot.x > this.sceneWidth) {
         this.shots.splice(idx, 1);

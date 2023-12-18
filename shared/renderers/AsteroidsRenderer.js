@@ -1,4 +1,3 @@
-import { IS_CHROME } from '../constants/constants';
 import { getRandomInt } from '../utils/utils';
 
 export class AsteroidsRenderer {
@@ -42,7 +41,7 @@ export class AsteroidsRenderer {
       if (asteroid.x <= -40) {
         asteroid.x = asteroid.initX;
       } else {
-        asteroid.x -= IS_CHROME ? 4 : 2;
+        asteroid.x -= 2;
       }
 
       this.renderAsteroids(asteroid.x, asteroid.y);

@@ -1,4 +1,3 @@
-import { IS_CHROME } from '../constants/constants';
 import { getRandomInt } from '../utils/utils';
 
 export class StarsRenderer {
@@ -33,7 +32,7 @@ export class StarsRenderer {
       if (star.x === 0) {
         star.x = this.sceneWidth;
       } else {
-        star.x -= IS_CHROME ? 2 : 1;
+        star.x -= 1;
       }
 
       this.renderStars(star.x, star.y);
